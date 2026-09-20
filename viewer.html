@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>PDF 预览</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #111; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .bar {
+      height: calc(56px + env(safe-area-inset-top));
+      padding: env(safe-area-inset-top) 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border-bottom: 1px solid #e6e6e6;
+    }
+    .title {
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .btn {
+      color: #111;
+      background: #f1f1ee;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 13px;
+      border: 0;
+    }
+    .viewer {
+      width: 100%;
+      height: calc(100% - 56px - env(safe-area-inset-top));
+      border: 0;
+      background: #2c2c2c;
+    }
+    .fallback {
+      position: fixed;
+      inset: 80px 20px 20px;
+      display: none;
+      place-items: center;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a class="btn" href="index.html">← 返回</a>
+    <div id="title" class="title">PDF 预览</div>
+    <a id="downloadBtn" class="btn" href="#" download>下载</a>
+    <a id="openBtn" class="btn" href="#" target="_blank" rel="noopener">打开</a>
+  </div>
+
+  <iframe id="viewer" class="viewer"></iframe>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const file = params.get("file");
+    const title = params.get("title") || "PDF 预览";
+
+    document.getElementById("title").textContent = title;
+    document.title = title;
+
+    if (!file) {
+      document.body.innerHTML = "<p style='color:white;padding:20px'>没有指定 PDF 文件。</p>";
+    } else {
+      document.getElementById("viewer").src = file + "#view=FitH";
+      document.getElementById("downloadBtn").href = file;
+      document.getElementById("openBtn").href = file;
+    }
+  </script>
+</body>
+</html>

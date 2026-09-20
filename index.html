@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f5f2" />
+  <title>我的教材库</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">MY LIBRARY</div>
+      <h1>我的教材库</h1>
+      <p>教材整理 · 在线预览 · 下载保存</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-wrap">
+      <input id="searchInput" type="search" placeholder="搜索教材名称、作者、课程…" autocomplete="off">
+    </section>
+
+    <section class="toolbar">
+      <div id="bookCount">0 本教材</div>
+      <select id="categoryFilter" aria-label="分类筛选">
+        <option value="all">全部分类</option>
+      </select>
+    </section>
+
+    <section id="bookGrid" class="book-grid"></section>
+
+    <div id="emptyState" class="empty hidden">
+      没有找到符合条件的教材。
+    </div>
+  </main>
+
+  <footer>
+    <p>仅用于整理你有权使用的学习资料。</p>
+  </footer>
+
+  <script src="books.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
