@@ -4,7 +4,7 @@ const BOOKS = [
     author: " ",
     category: " ",
     course: "MOS1023",
-    file: "pdfs/chapter1.pdf",
+    file: "https://pub-002f890c4bc747aaa00746a1da6d6bc4.r2.dev/chapter1.pdf",
     cover: "",
     tags: ["1", "2", "3"]
   },
@@ -13,7 +13,7 @@ const BOOKS = [
     author: " ",
     category: " ",
     course: "MOS1023",
-    file: "pdfs/chapter2.pdf",
+    file: "https://pub-002f890c4bc747aaa00746a1da6d6bc4.r2.dev/chapter2.pdf",
     cover: "",
     tags: ["1", "2", "3"]
   },
