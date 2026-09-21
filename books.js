@@ -84,5 +84,14 @@ const BOOKS = [
         file: "https://pub-002f890c4bc747aaa00746a1da6d6bc4.r2.dev/chapter19.pdf"
       }
     ]
+  },
+  {
+    id: "mos1021",
+    title: "MOS1021",
+    author: "",
+    category: "",
+    cover: "covers/mos1021.jpg",
+
+    file: "https://pub-002f890c4bc747aaa00746a1da6d6bc4.r2.dev/mos1021.pdf"
   }
 ];
