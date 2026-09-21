@@ -1,6 +1,5 @@
 const grid = document.getElementById("bookGrid");
 const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
 const bookCount = document.getElementById("bookCount");
 const emptyState = document.getElementById("emptyState");
 
@@ -48,6 +47,7 @@ function renderBooks() {
         <img
           class="book-cover"
           src="${escapeHtml(book.cover)}"
+          alt="${escapeHtml(book.title)}"
         >
       `
       : `
@@ -55,6 +55,21 @@ function renderBooks() {
           📘
         </div>
       `;
+
+    const hasChapters =
+      Array.isArray(book.chapters);
+
+    const openUrl = hasChapters
+      ? `book.html?id=${encodeURIComponent(book.id)}`
+      : `viewer.html?file=${encodeURIComponent(book.file)}&title=${encodeURIComponent(book.title)}`;
+
+    const buttonText = hasChapters
+      ? "查看章节"
+      : "打开教材";
+
+    const description = hasChapters
+      ? `${book.chapters.length} Chapters`
+      : "完整教材 PDF";
 
     return `
       <article class="book-card">
@@ -68,34 +83,22 @@ function renderBooks() {
           </h2>
 
           <div class="meta">
-
-            ${
-              book.author
-                ? escapeHtml(book.author)
-                : ""
-            }
-
-            <br>
-
-            ${book.chapters.length} Chapters
-
+            ${description}
           </div>
 
           <div class="tags">
-
             <span class="tag">
-              ${book.chapters.length} Chapters
+              ${description}
             </span>
-
           </div>
 
           <div class="actions">
 
             <a
               class="btn btn-primary"
-              href="book.html?id=${encodeURIComponent(book.id)}"
+              href="${openUrl}"
             >
-              打开教材
+              ${buttonText}
             </a>
 
           </div>
