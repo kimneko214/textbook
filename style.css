@@ -113,10 +113,10 @@ main {
 }
 
 .book-cover {
-  background: #ecece7;
-  min-height: 132px;
   width: 92px;
+  height: 132px;
   object-fit: cover;
+  background: #f2f2ef;
 }
 
 .cover-placeholder {
