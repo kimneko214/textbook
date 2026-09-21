@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>教材</title>
+
+<link
+  rel="stylesheet"
+  href="style.css"
+>
+
+<style>
+
+body {
+  background: #f5f5f2;
+}
+
+.book-page {
+
+  max-width: 760px;
+
+  margin: auto;
+
+  padding:
+
+    calc(
+      20px +
+      env(safe-area-inset-top)
+    )
+
+    16px
+
+    50px;
+
+}
+
+.back {
+
+  display: inline-block;
+
+  text-decoration: none;
+
+  color: #333;
+
+  background: white;
+
+  border:
+
+    1px solid
+
+    #e8e8e3;
+
+  border-radius: 12px;
+
+  padding:
+
+    10px
+
+    13px;
+
+  font-size: 14px;
+
+  margin-bottom: 25px;
+
+}
+
+.book-title {
+
+  font-size:
+
+    clamp(
+      30px,
+      9vw,
+      46px
+    );
+
+  margin:
+
+    0
+
+    0
+
+    8px;
+
+}
+
+.book-meta {
+
+  color: #777;
+
+  margin-bottom: 28px;
+
+}
+
+.chapter-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+.chapter {
+
+  background: white;
+
+  border:
+
+    1px solid
+
+    #e8e8e3;
+
+  border-radius: 17px;
+
+  padding: 14px;
+
+  text-decoration: none;
+
+  color: #1d1d1f;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  box-shadow:
+
+    0
+
+    5px
+
+    20px
+
+    rgba(0,0,0,.025);
+
+}
+
+.number {
+
+  width: 42px;
+
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #f0f0ed;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+}
+
+.chapter-title {
+
+  flex: 1;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+}
+
+.arrow {
+
+  font-size: 25px;
+
+  color: #aaa;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="book-page">
+
+
+<a
+  href="index.html"
+  class="back"
+>
+
+← 返回教材库
+
+</a>
+
+
+<h1
+  id="bookTitle"
+  class="book-title"
+>
+</h1>
+
+
+<div
+  id="bookMeta"
+  class="book-meta"
+>
+</div>
+
+
+<div
+  id="chapterList"
+  class="chapter-list"
+>
+</div>
+
+
+</main>
+
+
+<script src="books.js"></script>
+
+
+<script>
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const bookId =
+  params.get("id");
+
+
+const book =
+  BOOKS.find(
+    item =>
+      item.id === bookId
+  );
+
+
+const titleElement =
+  document.getElementById(
+    "bookTitle"
+  );
+
+
+const metaElement =
+  document.getElementById(
+    "bookMeta"
+  );
+
+
+const chapterList =
+  document.getElementById(
+    "chapterList"
+  );
+
+
+if (!book) {
+
+  titleElement.textContent =
+    "找不到教材";
+
+}
+
+else {
+
+  document.title =
+    book.title;
+
+
+  titleElement.textContent =
+    book.title;
+
+
+  metaElement.textContent =
+    `${book.chapters.length} Chapters`;
+
+
+  chapterList.innerHTML =
+    book.chapters
+      .map(
+        (chapter, index) => {
+
+          const viewerUrl =
+
+            "viewer.html" +
+
+            "?file=" +
+
+            encodeURIComponent(
+              chapter.file
+            )
+
+            +
+
+            "&title=" +
+
+            encodeURIComponent(
+
+              book.title
+
+              +
+
+              " · "
+
+              +
+
+              chapter.title
+
+            );
+
+
+          return `
+
+            <a
+              class="chapter"
+              href="${viewerUrl}"
+            >
+
+              <div class="number">
+
+                ${index + 1}
+
+              </div>
+
+
+              <div class="chapter-title">
+
+                ${chapter.title}
+
+              </div>
+
+
+              <div class="arrow">
+
+                ›
+
+              </div>
+
+            </a>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+</script>
+
+
+</body>
+
+</html>
