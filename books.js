@@ -4,7 +4,7 @@ const BOOKS = [
     title: "MOS1023",
     author: "",
     category: "",
-    cover: "covers/mos1023.jpg",
+    cover: "",
 
     chapters: [
       {
